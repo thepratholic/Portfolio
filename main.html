@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Pratham Chelaramani — Backend Developer</title>
+<meta name="description" content="Final Year CS Student interested in Backend Engineering, Algorithms and System Design." />
+<meta name="keywords" content="Pratham Chelaramani, Backend Developer, Python, Java, FastAPI, Django, Docker, AWS" />
+<meta property="og:title" content="Pratham Chelaramani — Backend Developer" />
+<meta property="og:description" content="Final Year CS Student into Backend Engineering, Algorithms and System Design." />
+<meta property="og:type" content="website" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;1,400&family=Bricolage+Grotesque:opsz,wght@12..60,400;12..60,500;12..60,700;12..60,800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --bg:       #07090d;
+  --bg-2:     #0d1117;
+  --bg-3:     #161b22;
+  --bg-4:     #1c2333;
+  --border:   #21262d;
+  --border-b: #30363d;
+  --accent:   #00e5a0;
+  --accent-2: #00b87d;
+  --adim:     rgba(0,229,160,.08);
+  --adim2:    rgba(0,229,160,.15);
+  --purple:   #a78bfa;
+  --pdim:     rgba(167,139,250,.1);
+  --amber:    #f59e0b;
+  --blue:     #79c0ff;
+  --text:     #e6edf3;
+  --text-2:   #8b949e;
+  --text-3:   #484f58;
+  --mono:     'JetBrains Mono', monospace;
+  --display:  'Bricolage Grotesque', sans-serif;
+  --body:     'DM Sans', sans-serif;
+  --r:        8px;
+  --rl:       14px;
+  --max:      1100px;
+  --ease:     .2s ease;
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--bg);color:var(--text);
+  font-family:var(--body);font-size:16px;line-height:1.7;
+  overflow-x:hidden;
+}
+a{color:inherit;text-decoration:none;}
+strong{font-weight:500;}
+
+/* ─── Grid bg ─── */
+body::before{
+  content:'';position:fixed;inset:0;
+  background-image:
+    linear-gradient(rgba(0,229,160,.025) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(0,229,160,.025) 1px,transparent 1px);
+  background-size:56px 56px;
+  pointer-events:none;z-index:0;
+}
+
+.wrap{max-width:var(--max);margin:0 auto;padding:0 28px;}
+section{position:relative;z-index:1;}
+
+/* ─── Nav ─── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  background:rgba(7,9,13,.88);backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--border);
+}
+.nav-i{
+  max-width:var(--max);margin:0 auto;padding:0 28px;
+  height:62px;display:flex;align-items:center;justify-content:space-between;
+}
+.logo{font-family:var(--mono);font-size:15px;color:var(--accent);letter-spacing:.05em;}
+.logo em{color:var(--text-3);font-style:normal;}
+.nav-links{display:flex;gap:30px;list-style:none;}
+.nav-links a{
+  font-family:var(--mono);font-size:11.5px;color:var(--text-3);
+  letter-spacing:.1em;text-transform:uppercase;
+  transition:color var(--ease);
+}
+.nav-links a:hover{color:var(--accent);}
+.nav-btn{
+  font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;
+  padding:8px 18px;border:1px solid var(--accent);border-radius:var(--r);
+  color:var(--accent);transition:all var(--ease);
+}
+.nav-btn:hover{background:var(--adim);}
+.ham{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;}
+.ham span{display:block;width:20px;height:1.5px;background:var(--text-2);border-radius:2px;transition:all .3s;}
+
+/* ─── Mobile nav menu ─── */
+.mob-nav{
+  display:none;position:fixed;top:62px;left:0;right:0;z-index:99;
+  background:rgba(7,9,13,.97);border-bottom:1px solid var(--border);
+  padding:20px 28px;flex-direction:column;gap:18px;
+}
+.mob-nav.open{display:flex;}
+.mob-nav a{font-family:var(--mono);font-size:13px;color:var(--text-2);letter-spacing:.08em;text-transform:uppercase;}
+.mob-nav a:hover{color:var(--accent);}
+
+/* ─── Hero ─── */
+#hero{
+  padding:136px 0 100px;min-height:100vh;
+  display:flex;align-items:center;
+}
+.hero-g{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:64px;align-items:center;
+}
+.hero-kicker{
+  font-family:var(--mono);font-size:12px;color:var(--accent);
+  letter-spacing:.12em;text-transform:uppercase;
+  display:flex;align-items:center;gap:10px;margin-bottom:22px;
+}
+.hero-kicker::before{content:'';width:24px;height:1px;background:var(--accent);}
+.hero-name{
+  font-family:var(--display);
+  font-size:clamp(44px,5.5vw,74px);
+  font-weight:800;line-height:1.04;letter-spacing:-.04em;
+  margin-bottom:18px;
+}
+.hero-name .hi{color:var(--accent);}
+.hero-tag{
+  font-family:var(--mono);font-size:18px;color:var(--text-2);
+  margin-bottom:26px;min-height:28px;
+}
+.caret{
+  display:inline-block;width:10px;height:18px;
+  background:var(--accent);margin-left:3px;
+  vertical-align:middle;border-radius:1px;
+  animation:blink 1s step-end infinite;
+}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+.hero-bio{
+  font-size:17px;color:var(--text-2);line-height:1.85;
+  margin-bottom:40px;max-width:470px;
+}
+.ctas{display:flex;gap:14px;flex-wrap:wrap;}
+.btn-p{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:12px 26px;background:var(--accent);color:#07090d;
+  font-family:var(--mono);font-size:12px;font-weight:600;
+  letter-spacing:.06em;text-transform:uppercase;border-radius:var(--r);
+  transition:all var(--ease);
+}
+.btn-p:hover{background:#00c98b;transform:translateY(-1px);}
+.btn-o{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:12px 26px;background:transparent;color:var(--text);
+  font-family:var(--mono);font-size:12px;font-weight:500;
+  letter-spacing:.06em;text-transform:uppercase;border-radius:var(--r);
+  border:1px solid var(--border-b);transition:all var(--ease);
+}
+.btn-o:hover{border-color:var(--accent);color:var(--accent);background:var(--adim);}
+
+/* ─── Terminal ─── */
+.term{
+  background:var(--bg-2);border:1px solid var(--border);
+  border-radius:var(--rl);overflow:hidden;
+  box-shadow:0 0 60px rgba(0,229,160,.04);
+}
+.term-h{
+  display:flex;align-items:center;gap:8px;
+  padding:13px 16px;border-bottom:1px solid var(--border);
+  background:var(--bg-3);
+}
+.d{width:12px;height:12px;border-radius:50%;}
+.d.r{background:#ff5f57;}.d.y{background:#ffbd2e;}.d.g{background:#28c840;}
+.term-t{font-family:var(--mono);font-size:11.5px;color:var(--text-3);margin-left:6px;}
+.term-b{padding:22px 24px;font-family:var(--mono);font-size:13px;line-height:2.1;}
+.tp{color:var(--accent);}
+.tc{color:var(--text);}
+.tk{color:var(--purple);}
+.tv{color:var(--blue);}
+.ts{color:#a5d6ff;}
+.tn{color:var(--amber);}
+.tg{color:var(--text-3);}
+.tl{display:flex;gap:8px;}
+
+/* ─── Section headers ─── */
+.sh{margin-bottom:56px;}
+.stag{
+  font-family:var(--mono);font-size:11.5px;color:var(--accent);
+  text-transform:uppercase;letter-spacing:.15em;
+  display:flex;align-items:center;gap:14px;margin-bottom:14px;
+}
+.stag::after{content:'';flex:1;height:1px;background:var(--border);}
+.stitle{
+  font-family:var(--display);
+  font-size:clamp(30px,3.8vw,46px);
+  font-weight:700;letter-spacing:-.035em;line-height:1.1;
+}
+
+/* ─── About ─── */
+#about{padding:100px 0;}
+.about-g{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start;}
+.about-t p{color:var(--text-2);font-size:17px;line-height:1.85;margin-bottom:20px;}
+.about-t .hl{color:var(--accent);font-weight:500;}
+.atbns{display:flex;gap:12px;margin-top:28px;}
+.stats-g{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.sc{
+  background:var(--bg-2);border:1px solid var(--border);
+  border-radius:var(--rl);padding:22px;
+  transition:border-color var(--ease),transform var(--ease);
+}
+.sc:hover{border-color:var(--accent);transform:translateY(-2px);}
+.sc-plat{font-family:var(--mono);font-size:10.5px;color:var(--text-3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px;}
+.sc-val{font-family:var(--display);font-size:30px;font-weight:700;color:var(--accent);line-height:1;margin-bottom:4px;}
+.sc-lbl{font-size:13px;color:var(--text-2);}
+.sc-badge{
+  display:inline-flex;align-items:center;gap:4px;
+  margin-top:10px;padding:3px 9px;
+  background:var(--adim);border-radius:4px;
+  font-family:var(--mono);font-size:11px;color:var(--accent);
+}
+
+/* ─── Skills ─── */
+#skills{
+  padding:100px 0;
+  background:var(--bg-2);
+  border-top:1px solid var(--border);border-bottom:1px solid var(--border);
+}
+.skills-g{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;}
+.sg{
+  background:var(--bg-3);border:1px solid var(--border);
+  border-radius:var(--rl);padding:26px;
+  transition:border-color var(--ease);
+}
+.sg:hover{border-color:var(--border-b);}
+.sg-t{
+  font-family:var(--mono);font-size:11.5px;color:var(--accent);
+  text-transform:uppercase;letter-spacing:.12em;
+  display:flex;align-items:center;gap:8px;margin-bottom:18px;
+}
+.sg-t::before{content:'//';color:var(--text-3);font-style:normal;}
+.chips{display:flex;flex-wrap:wrap;gap:8px;}
+.chip{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:6px 13px;background:var(--bg-4);
+  border:1px solid var(--border);border-radius:6px;
+  font-family:var(--mono);font-size:12px;color:var(--text-2);
+  transition:all var(--ease);cursor:default;
+}
+.chip:hover{border-color:var(--accent);color:var(--accent);background:var(--adim);}
+.dot{width:6px;height:6px;border-radius:50%;background:var(--accent);opacity:.55;}
+
+/* ─── Projects ─── */
+#projects{padding:100px 0;}
+.proj-g{display:grid;grid-template-columns:1fr 1fr;gap:22px;}
+.pc{
+  background:var(--bg-2);border:1px solid var(--border);
+  border-radius:var(--rl);overflow:hidden;
+  display:flex;flex-direction:column;
+  transition:border-color var(--ease),transform var(--ease);
+}
+.pc:hover{border-color:var(--border-b);transform:translateY(-3px);}
+.pc-h{
+  display:flex;align-items:center;gap:10px;
+  padding:14px 18px;border-bottom:1px solid var(--border);
+  background:var(--bg-3);
+}
+.pdots{display:flex;gap:6px;}
+.pd{width:10px;height:10px;border-radius:50%;background:var(--border-b);}
+.pd.on{background:var(--accent);}
+.pf{font-family:var(--mono);font-size:12.5px;color:var(--text-2);}
+.pext{
+  margin-left:auto;color:var(--text-3);transition:color var(--ease);
+}
+.pc:hover .pext{color:var(--accent);}
+.pb{padding:22px;flex:1;}
+.pn{
+  font-family:var(--display);font-size:21px;font-weight:700;
+  letter-spacing:-.02em;margin-bottom:10px;
+}
+.pd-t{font-size:14px;color:var(--text-2);line-height:1.7;margin-bottom:18px;}
+.ph{list-style:none;margin-bottom:18px;}
+.ph li{
+  font-size:13px;color:var(--text-2);
+  padding:3px 0 3px 18px;
+  position:relative;line-height:1.65;
+}
+.ph li::before{
+  content:'→';position:absolute;left:0;
+  color:var(--accent);font-family:var(--mono);font-size:12px;
+}
+.pf-row{
+  padding:14px 22px;border-top:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;
+}
+.ptags{display:flex;flex-wrap:wrap;gap:7px;}
+.ptag{
+  font-family:var(--mono);font-size:11px;color:var(--purple);
+  background:var(--pdim);padding:3px 10px;border-radius:4px;
+}
+.pgh{
+  font-family:var(--mono);font-size:12px;color:var(--text-2);
+  display:flex;align-items:center;gap:6px;
+  transition:color var(--ease);
+}
+.pgh:hover{color:var(--accent);}
+
+/* ─── CP ─── */
+#cp{
+  padding:100px 0;
+  background:var(--bg-2);
+  border-top:1px solid var(--border);border-bottom:1px solid var(--border);
+}
+.cp-top{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-bottom:32px;}
+.cpb{
+  background:var(--bg-3);border:1px solid var(--border);
+  border-radius:var(--rl);padding:26px;text-align:center;
+  transition:border-color var(--ease),transform var(--ease);
+}
+.cpb:hover{border-color:var(--accent);transform:translateY(-2px);}
+.cpb-ico{font-size:30px;display:block;margin-bottom:12px;}
+.cpb-title{font-family:var(--display);font-size:19px;font-weight:700;margin-bottom:5px;}
+.cpb-sub{font-family:var(--mono);font-size:11px;color:var(--text-3);}
+.cpb-r{font-family:var(--mono);font-size:14px;color:var(--accent);margin-top:8px;}
+.clist{display:flex;flex-direction:column;gap:10px;}
+.ci{
+  background:var(--bg-3);border:1px solid var(--border);
+  border-radius:var(--r);padding:15px 20px;
+  display:flex;align-items:center;gap:16px;
+  transition:border-color var(--ease);
+}
+.ci:hover{border-color:var(--border-b);}
+.crank{font-family:var(--mono);font-size:20px;font-weight:600;color:var(--accent);min-width:56px;}
+.crlbl{font-family:var(--mono);font-size:10px;color:var(--text-3);text-transform:uppercase;margin-top:1px;}
+.cdiv{width:1px;height:38px;background:var(--border);}
+.cname{font-size:15px;font-weight:500;}
+.cdet{font-family:var(--mono);font-size:11.5px;color:var(--text-3);margin-top:2px;}
+.cpart{margin-left:auto;font-family:var(--mono);font-size:11px;color:var(--text-3);}
+
+/* ─── Education ─── */
+#education{padding:100px 0;}
+.edu-line{position:relative;padding-left:36px;}
+.edu-line::before{
+  content:'';position:absolute;left:0;top:10px;bottom:10px;
+  width:1px;background:var(--border);
+}
+.ei{position:relative;margin-bottom:48px;}
+.ei:last-child{margin-bottom:0;}
+.ei::before{
+  content:'';position:absolute;left:-40px;top:9px;
+  width:10px;height:10px;border-radius:50%;
+  background:var(--accent);
+  box-shadow:0 0 0 3px var(--bg),0 0 0 5px rgba(0,229,160,.3);
+}
+.ep{
+  font-family:var(--mono);font-size:11.5px;color:var(--accent);
+  text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px;
+}
+.edeg{
+  font-family:var(--display);font-size:22px;font-weight:700;
+  letter-spacing:-.025em;margin-bottom:4px;
+}
+.esch{font-size:15px;color:var(--text-2);}
+
+/* ─── Contact ─── */
+#contact{padding:100px 0 80px;}
+.con-wrap{max-width:580px;}
+.con-desc{color:var(--text-2);font-size:17px;line-height:1.85;margin-bottom:8px;}
+.clinks{display:flex;flex-direction:column;gap:10px;margin-top:36px;}
+.cl{
+  display:flex;align-items:center;gap:16px;
+  padding:15px 22px;background:var(--bg-2);
+  border:1px solid var(--border);border-radius:var(--rl);
+  transition:all var(--ease);
+}
+.cl:hover{border-color:var(--accent);background:var(--adim);}
+.cl-ico{
+  width:40px;height:40px;border-radius:var(--r);
+  background:var(--bg-3);display:flex;align-items:center;justify-content:center;
+  font-size:18px;flex-shrink:0;
+}
+.cl-lbl{font-family:var(--mono);font-size:10.5px;color:var(--text-3);text-transform:uppercase;letter-spacing:.1em;}
+.cl-val{font-size:14.5px;color:var(--text);font-weight:500;margin-top:1px;}
+.cl-arr{margin-left:auto;color:var(--text-3);font-size:18px;transition:color var(--ease),transform var(--ease);}
+.cl:hover .cl-arr{color:var(--accent);transform:translateX(4px);}
+
+/* ─── Footer ─── */
+footer{border-top:1px solid var(--border);padding:30px 0;}
+.ft{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+.ft-t{font-family:var(--mono);font-size:11.5px;color:var(--text-3);}
+.ft-t span{color:var(--accent);}
+.social-row{display:flex;gap:16px;}
+.social-row a{
+  color:var(--text-3);transition:color var(--ease);
+  display:flex;align-items:center;
+}
+.social-row a:hover{color:var(--accent);}
+
+/* ─── Fade-in animations ─── */
+.fi{opacity:0;transform:translateY(22px);transition:opacity .65s ease,transform .65s ease;}
+.fi.v{opacity:1;transform:none;}
+.fi.d1{transition-delay:.1s;}
+.fi.d2{transition-delay:.2s;}
+.fi.d3{transition-delay:.3s;}
+
+/* ─── Responsive ─── */
+@media(max-width:820px){
+  .hero-g{grid-template-columns:1fr;}
+  .term{display:none;}
+  .about-g{grid-template-columns:1fr;}
+  .skills-g{grid-template-columns:1fr;}
+  .proj-g{grid-template-columns:1fr;}
+  .cp-top{grid-template-columns:1fr;}
+  .nav-links,.nav-btn{display:none;}
+  .ham{display:flex;}
+  .ft{flex-direction:column;text-align:center;}
+  .atbns{flex-wrap:wrap;}
+}
+@media(max-width:480px){
+  .wrap{padding:0 18px;}
+  .hero-name{font-size:40px;}
+}
+</style>
+</head>
+<body>
+
+<!-- ─── Nav ─── -->
+<nav id="nav">
+  <div class="nav-i">
+    <div class="logo">PC<em>.dev</em></div>
+    <ul class="nav-links">
+      <li><a href="#about">about</a></li>
+      <li><a href="#skills">skills</a></li>
+      <li><a href="#projects">projects</a></li>
+      <li><a href="#cp">cp</a></li>
+      <li><a href="#education">education</a></li>
+      <li><a href="#contact">contact</a></li>
+    </ul>
+    <a class="nav-btn" href="https://drive.google.com/file/d/157OcxMtNO-qLkeOvr1hJtGneBeyvxytt/view?usp=drive_link" target="_blank">Resume ↗</a>
+    <div class="ham" id="ham" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile nav -->
+<div class="mob-nav" id="mobNav">
+  <a href="#about"     onclick="closeNav()">about</a>
+  <a href="#skills"    onclick="closeNav()">skills</a>
+  <a href="#projects"  onclick="closeNav()">projects</a>
+  <a href="#cp"        onclick="closeNav()">competitive programming</a>
+  <a href="#education" onclick="closeNav()">education</a>
+  <a href="#contact"   onclick="closeNav()">contact</a>
+  <a href="https://drive.google.com/file/d/157OcxMtNO-qLkeOvr1hJtGneBeyvxytt/view?usp=drive_link" target="_blank">resume ↗</a>
+</div>
+
+<!-- ─── Hero ─── -->
+<section id="hero">
+  <div class="wrap">
+    <div class="hero-g">
+      <div>
+        <div class="hero-kicker">Available for Opportunities</div>
+        <h1 class="hero-name">Pratham<br><span class="hi">Chelaramani</span></h1>
+        <p class="hero-tag" id="tagline"><span class="caret"></span></p>
+        <p class="hero-bio">Final Year CS Student interested in Backend Engineering, Algorithms and System Design. I build things that scale.</p>
+        <div class="ctas">
+          <a class="btn-p" href="https://drive.google.com/file/d/157OcxMtNO-qLkeOvr1hJtGneBeyvxytt/view?usp=drive_link" target="_blank">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7,10 12,15 17,10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Resume
+          </a>
+          <a class="btn-o" href="https://github.com/thepratholic" target="_blank">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+            GitHub
+          </a>
+          <a class="btn-o" href="https://www.linkedin.com/in/thepratholic/" target="_blank">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            LinkedIn
+          </a>
+        </div>
+      </div>
+
+      <!-- Terminal -->
+      <div class="term" aria-hidden="true">
+        <div class="term-h">
+          <div class="d r"></div><div class="d y"></div><div class="d g"></div>
+          <span class="term-t">pratham@portfolio ~ %</span>
+        </div>
+        <div class="term-b">
+          <div class="tl"><span class="tp">❯</span><span class="tc">&nbsp;cat profile.json</span></div>
+          <div class="tl"><span class="tg">{</span></div>
+          <div class="tl"><span class="tg">&nbsp;&nbsp;</span><span class="tk">"name"</span><span class="tg">:&nbsp;</span><span class="ts">"Pratham Chelaramani"</span><span class="tg">,</span></div>
+          <div class="tl"><span class="tg">&nbsp;&nbsp;</span><span class="tk">"role"</span><span class="tg">:&nbsp;</span><span class="ts">"Backend Developer"</span><span class="tg">,</span></div>
+          <div class="tl"><span class="tg">&nbsp;&nbsp;</span><span class="tk">"location"</span><span class="tg">:&nbsp;</span><span class="ts">"Gujarat, India"</span><span class="tg">,</span></div>
+          <div class="tl"><span class="tg">&nbsp;&nbsp;</span><span class="tk">"lc_rating"</span><span class="tg">:&nbsp;</span><span class="tn">2166</span><span class="tg">,</span></div>
+          <div class="tl"><span class="tg">&nbsp;&nbsp;</span><span class="tk">"cf_rating"</span><span class="tg">:&nbsp;</span><span class="tn">1534</span><span class="tg">,</span></div>
+          <div class="tl"><span class="tg">&nbsp;&nbsp;</span><span class="tk">"icpc_air"</span><span class="tg">:&nbsp;</span><span class="tn">256</span><span class="tg">,</span></div>
+          <div class="tl"><span class="tg">&nbsp;&nbsp;</span><span class="tk">"stack"</span><span class="tg">:&nbsp;[</span><span class="ts">"Python"</span><span class="tg">,</span><span class="ts">"Java"</span><span class="tg">,</span><span class="ts">"Go"</span><span class="tg">],</span></div>
+          <div class="tl"><span class="tg">&nbsp;&nbsp;</span><span class="tk">"open_to_work"</span><span class="tg">:&nbsp;</span><span class="tv">true</span></div>
+          <div class="tl"><span class="tg">}</span></div>
+          <br>
+          <div class="tl"><span class="tp">❯</span><span>&nbsp;</span><span style="display:inline-block;width:9px;height:16px;background:var(--accent);border-radius:1px;vertical-align:middle;animation:blink 1s step-end infinite;"></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── About ─── -->
+<section id="about">
+  <div class="wrap">
+    <div class="sh fi">
+      <div class="stag">01 // about</div>
+      <h2 class="stitle">Who I am</h2>
+    </div>
+    <div class="about-g">
+      <div class="about-t fi">
+        <p>I'm Pratham — a final-year Computer Science student at BVM Engineering College, Gujarat. My focus is on <span class="hl">backend engineering</span>: building systems that are fast, reliable, and battle-tested.</p>
+        <p>I enjoy going low-level. Whether it's architecting a <span class="hl">Redis-inspired in-memory cache</span> from scratch with 16-shard concurrency, or crawling the web at 2.26 pages/sec using Java's ExecutorService — I like knowing how things work under the hood.</p>
+        <p>Outside coursework, I compete seriously in <span class="hl">competitive programming</span>. I'm a Guardian on LeetCode and Specialist on Codeforces, and I've represented my college at ICPC Asia West Regionals.</p>
+        <div class="atbns">
+          <a class="btn-o" href="mailto:chelaramanipratham@gmail.com" style="font-size:12px;padding:9px 20px;">Email Me</a>
+          <a class="btn-o" href="https://leetcode.com/u/thepratholic/" target="_blank" style="font-size:12px;padding:9px 20px;">LeetCode</a>
+          <a class="btn-o" href="https://codeforces.com/profile/thepratholic" target="_blank" style="font-size:12px;padding:9px 20px;">Codeforces</a>
+        </div>
+      </div>
+      <div class="stats-g fi d2">
+        <div class="sc">
+          <div class="sc-plat">LeetCode</div>
+          <div class="sc-val">2166</div>
+          <div class="sc-lbl">Max Rating</div>
+          <div class="sc-badge">🏅 Guardian</div>
+        </div>
+        <div class="sc">
+          <div class="sc-plat">Codeforces</div>
+          <div class="sc-val">1534</div>
+          <div class="sc-lbl">Max Rating</div>
+          <div class="sc-badge">🎖 Specialist</div>
+        </div>
+        <div class="sc">
+          <div class="sc-plat">ICPC</div>
+          <div class="sc-val">AIR 256</div>
+          <div class="sc-lbl">Asia West Regionals</div>
+          <div class="sc-badge">🌏 Amritapuri–Mysuru</div>
+        </div>
+        <div class="sc">
+          <div class="sc-plat">Best LC Rank</div>
+          <div class="sc-val">GR 173</div>
+          <div class="sc-lbl">Biweekly 182</div>
+          <div class="sc-badge">👥 ~28K participants</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Skills ─── -->
+<section id="skills">
+  <div class="wrap">
+    <div class="sh fi">
+      <div class="stag">02 // skills</div>
+      <h2 class="stitle">Tech Stack</h2>
+    </div>
+    <div class="skills-g fi d1">
+      <div class="sg">
+        <div class="sg-t">Languages</div>
+        <div class="chips">
+          <span class="chip"><span class="dot"></span>Python</span>
+          <span class="chip"><span class="dot"></span>Java</span>
+          <span class="chip"><span class="dot"></span>Go</span>
+          <span class="chip"><span class="dot"></span>SQL</span>
+        </div>
+      </div>
+      <div class="sg">
+        <div class="sg-t">Frameworks &amp; Libraries</div>
+        <div class="chips">
+          <span class="chip"><span class="dot"></span>FastAPI</span>
+          <span class="chip"><span class="dot"></span>Django</span>
+          <span class="chip"><span class="dot"></span>NumPy</span>
+          <span class="chip"><span class="dot"></span>Pandas</span>
+        </div>
+      </div>
+      <div class="sg">
+        <div class="sg-t">Databases</div>
+        <div class="chips">
+          <span class="chip"><span class="dot"></span>MySQL</span>
+          <span class="chip"><span class="dot"></span>Redis</span>
+          <span class="chip"><span class="dot"></span>MongoDB</span>
+        </div>
+      </div>
+      <div class="sg">
+        <div class="sg-t">Tools &amp; Platforms</div>
+        <div class="chips">
+          <span class="chip"><span class="dot"></span>Docker</span>
+          <span class="chip"><span class="dot"></span>Git</span>
+          <span class="chip"><span class="dot"></span>GitHub</span>
+          <span class="chip"><span class="dot"></span>AWS</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Projects ─── -->
+<section id="projects">
+  <div class="wrap">
+    <div class="sh fi">
+      <div class="stag">03 // projects</div>
+      <h2 class="stitle">Things I've Built</h2>
+    </div>
+    <div class="proj-g">
+
+      <!-- SpiderCore -->
+      <a class="pc fi" href="https://github.com/thepratholic/SpiderCore" target="_blank">
+        <div class="pc-h">
+          <div class="pdots">
+            <div class="pd on"></div><div class="pd"></div><div class="pd"></div>
+          </div>
+          <span class="pf">SpiderCore.java</span>
+          <svg class="pext" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15,3 21,3 21,9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </div>
+        <div class="pb">
+          <div class="pn">SpiderCore</div>
+          <p class="pd-t">A high-performance multithreaded Java web crawler using ExecutorService &amp; Phaser.</p>
+          <ul class="ph">
+            <li>Achieved 2.26 pages/sec across 364 URLs via depth-limited BFS on Wikipedia</li>
+            <li>Thread-safe URL management with ConcurrentHashMap (O(1) dedup) &amp; LinkedBlockingQueue</li>
+            <li>MySQL via JDBC for persistent storage with crash recovery across restarts</li>
+            <li>Real-time crawler metrics via AtomicInteger — crawled, failed, throughput</li>
+          </ul>
+        </div>
+        <div class="pf-row">
+          <div class="ptags">
+            <span class="ptag">Java</span>
+            <span class="ptag">MySQL</span>
+            <span class="ptag">JDBC</span>
+            <span class="ptag">Concurrency</span>
+          </div>
+          <span class="pgh">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+            View Source
+          </span>
+        </div>
+      </a>
+
+      <!-- KV Cache -->
+      <a class="pc fi d1" href="https://github.com/thepratholic/In-Memory-Key-Value-Cache" target="_blank">
+        <div class="pc-h">
+          <div class="pdots">
+            <div class="pd on"></div><div class="pd"></div><div class="pd"></div>
+          </div>
+          <span class="pf">kv_cache.py</span>
+          <svg class="pext" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15,3 21,3 21,9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </div>
+        <div class="pb">
+          <div class="pn">In-Memory Key-Value Cache</div>
+          <p class="pd-t">A Redis-inspired in-memory KV cache in Python with 16-shard architecture and a custom RWLock.</p>
+          <ul class="ph">
+            <li>16-shard architecture with custom RWLock for parallel reads — zero external dependencies</li>
+            <li>DJB2 hashing + bitmask for O(1) shard selection; 700K entry cap with auto-eviction</li>
+            <li>Multi-stage Docker (non-root) with OS tuning for 1M+ file descriptor support</li>
+            <li>HTTP layer on FastAPI + Uvicorn with Pydantic validation &amp; pytest coverage</li>
+          </ul>
+        </div>
+        <div class="pf-row">
+          <div class="ptags">
+            <span class="ptag">Python</span>
+            <span class="ptag">FastAPI</span>
+            <span class="ptag">Docker</span>
+            <span class="ptag">Redis</span>
+          </div>
+          <span class="pgh">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+            View Source
+          </span>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- ─── Competitive Programming ─── -->
+<section id="cp">
+  <div class="wrap">
+    <div class="sh fi">
+      <div class="stag">04 // competitive programming</div>
+      <h2 class="stitle">CP Achievements</h2>
+    </div>
+    <div class="cp-top fi">
+      <div class="cpb">
+        <span class="cpb-ico">🏅</span>
+        <div class="cpb-title">LeetCode Guardian</div>
+        <div class="cpb-sub">@thepratholic</div>
+        <div class="cpb-r">Max Rating: 2166</div>
+      </div>
+      <div class="cpb">
+        <span class="cpb-ico">🎖</span>
+        <div class="cpb-title">CF Specialist</div>
+        <div class="cpb-sub">@thepratholic</div>
+        <div class="cpb-r">Max Rating: 1534</div>
+      </div>
+      <div class="cpb">
+        <span class="cpb-ico">🌏</span>
+        <div class="cpb-title">ICPC Regionalist</div>
+        <div class="cpb-sub">Asia West — Amritapuri–Mysuru</div>
+        <div class="cpb-r">All India Rank: 256</div>
+      </div>
+    </div>
+    <div class="clist fi d2">
+      <div class="ci">
+        <div><div class="crank">GR 173</div><div class="crlbl">Global Rank</div></div>
+        <div class="cdiv"></div>
+        <div>
+          <div class="cname">LeetCode Biweekly Contest 182</div>
+          <div class="cdet">~28,000 participants</div>
+        </div>
+        <div class="cpart">LC BW #182</div>
+      </div>
+      <div class="ci">
+        <div><div class="crank">GR 185</div><div class="crlbl">Global Rank</div></div>
+        <div class="cdiv"></div>
+        <div>
+          <div class="cname">LeetCode Biweekly Contest 180</div>
+          <div class="cdet">~35,000 participants</div>
+        </div>
+        <div class="cpart">LC BW #180</div>
+      </div>
+      <div class="ci">
+        <div><div class="crank">GR 567</div><div class="crlbl">AIR 167</div></div>
+        <div class="cdiv"></div>
+        <div>
+          <div class="cname">LeetCode Weekly Contest 490</div>
+          <div class="cdet">~43,000+ participants</div>
+        </div>
+        <div class="cpart">LC Weekly #490</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Education ─── -->
+<section id="education">
+  <div class="wrap">
+    <div class="sh fi">
+      <div class="stag">05 // education</div>
+      <h2 class="stitle">Academic Journey</h2>
+    </div>
+    <div class="edu-line">
+      <div class="ei fi">
+        <div class="ep">Aug 2024 — Jun 2027</div>
+        <div class="edeg">B.Tech in Computer Science</div>
+        <div class="esch">Birla Vishvakarma Mahavidyalaya (BVM), Gujarat</div>
+      </div>
+      <div class="ei fi d1">
+        <div class="ep">Sep 2021 — Jul 2024</div>
+        <div class="edeg">Diploma in Computer Science Engineering</div>
+        <div class="esch">Government Polytechnic Ahmedabad</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Contact ─── -->
+<section id="contact">
+  <div class="wrap">
+    <div class="sh fi">
+      <div class="stag">06 // contact</div>
+      <h2 class="stitle">Let's Connect</h2>
+    </div>
+    <div class="con-wrap fi">
+      <p class="con-desc">I'm open to backend engineering roles, internships, and CP discussions. My inbox is always open — say hi!</p>
+      <div class="clinks">
+        <a class="cl" href="mailto:chelaramanipratham@gmail.com">
+          <div class="cl-ico">📧</div>
+          <div><div class="cl-lbl">Email</div><div class="cl-val">chelaramanipratham@gmail.com</div></div>
+          <span class="cl-arr">→</span>
+        </a>
+        <a class="cl" href="https://www.linkedin.com/in/thepratholic/" target="_blank">
+          <div class="cl-ico">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="var(--text-2)"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          </div>
+          <div><div class="cl-lbl">LinkedIn</div><div class="cl-val">thepratholic</div></div>
+          <span class="cl-arr">→</span>
+        </a>
+        <a class="cl" href="https://github.com/thepratholic" target="_blank">
+          <div class="cl-ico">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="var(--text-2)"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+          </div>
+          <div><div class="cl-lbl">GitHub</div><div class="cl-val">thepratholic</div></div>
+          <span class="cl-arr">→</span>
+        </a>
+        <a class="cl" href="https://leetcode.com/u/thepratholic/" target="_blank">
+          <div class="cl-ico">🧠</div>
+          <div><div class="cl-lbl">LeetCode</div><div class="cl-val">thepratholic — Guardian (2166)</div></div>
+          <span class="cl-arr">→</span>
+        </a>
+        <a class="cl" href="https://codeforces.com/profile/thepratholic" target="_blank">
+          <div class="cl-ico">⚡</div>
+          <div><div class="cl-lbl">Codeforces</div><div class="cl-val">thepratholic — Specialist (1534)</div></div>
+          <span class="cl-arr">→</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Footer ─── -->
+<footer>
+  <div class="wrap">
+    <div class="ft">
+      <div class="ft-t">Designed &amp; built by <span>Pratham Chelaramani</span></div>
+      <div class="social-row">
+        <a href="https://github.com/thepratholic" target="_blank" aria-label="GitHub">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+        </a>
+        <a href="https://www.linkedin.com/in/thepratholic/" target="_blank" aria-label="LinkedIn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        </a>
+        <a href="mailto:chelaramanipratham@gmail.com" aria-label="Email">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22,7-10,7L2,7"/></svg>
+        </a>
+      </div>
+      <div class="ft-t">Gujarat, India <span>•</span> 2026</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ─── Typing animation ───
+const tagEl = document.getElementById('tagline');
+const words = ['Backend Developer','System Designer','Algorithm Enthusiast','CP Competitor'];
+let wi = 0, ci = 0, del = false;
+
+function type() {
+  const w = words[wi];
+  tagEl.innerHTML = w.slice(0, ci) + '<span class="caret"></span>';
+  if (!del && ci < w.length) { ci++; setTimeout(type, 75); }
+  else if (!del) { setTimeout(() => { del = true; type(); }, 2200); }
+  else if (del && ci > 0) { ci--; setTimeout(type, 38); }
+  else { del = false; wi = (wi + 1) % words.length; setTimeout(type, 400); }
+}
+type();
+
+// ─── Scroll fade-in ───
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('v'); });
+}, { threshold: 0.08 });
+document.querySelectorAll('.fi').forEach(el => obs.observe(el));
+
+// ─── Mobile nav ───
+const ham = document.getElementById('ham');
+const mob = document.getElementById('mobNav');
+ham.addEventListener('click', () => {
+  const open = mob.classList.toggle('open');
+  ham.children[0].style.transform = open ? 'rotate(45deg) translate(5px,5px)' : '';
+  ham.children[1].style.opacity  = open ? '0' : '1';
+  ham.children[2].style.transform = open ? 'rotate(-45deg) translate(5px,-5px)' : '';
+});
+function closeNav() {
+  mob.classList.remove('open');
+  ham.children[0].style.transform = '';
+  ham.children[1].style.opacity = '1';
+  ham.children[2].style.transform = '';
+}
+
+// ─── Nav active link on scroll ───
+const sections = document.querySelectorAll('section[id]');
+const links    = document.querySelectorAll('.nav-links a');
+window.addEventListener('scroll', () => {
+  let cur = '';
+  sections.forEach(s => { if (window.scrollY >= s.offsetTop - 100) cur = s.id; });
+  links.forEach(l => {
+    l.style.color = l.getAttribute('href') === '#' + cur ? 'var(--accent)' : '';
+  });
+}, { passive: true });
+</script>
+
+</body>
+</html>
